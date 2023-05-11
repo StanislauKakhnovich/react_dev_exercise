@@ -242,58 +242,80 @@
 //   return <FilterableProductTable products={PRODUCTS} />;
 // }
 
-import { getImageUrl } from './utils.js';
-let dataArr = [{name: 'Maria Skłodowska-Curie',
-             imagId: 'szV5sdG',
-              profession: 'physicist and chemist',
-              discovered: 'polonium (element)',
-              awardsQty: '4',
-              awardsText: '(Nobel Prize in Physics, Nobel Prize in Chemistry, Davy Medal, Matt'
-            },
-               {
-                 name: 'Katsuko Saruhashi',
-             imagId: 'YfeOqp2',
-              profession: 'geochemist',
-              discovered: 'a method for measuring carbon dioxide in seawater',
-              awardsQty: '2',
-              awardsText: '(Miyake Prize for geochemistry, Tanaka Prize)'
-               }
-              ]
-function Profile ({dataObj}) {
-  return (
-     <section className="profile">
-        <h2>{dataObj.name}</h2>
-        <img
-          className="avatar"
-          src={getImageUrl(dataObj.imagId)}
-          alt={dataObj.name}
-          width={70}
-          height={70}
-        />
-        <ul>
-          <li>
-            <b>Profession: </b> 
-            {dataObj.profession}
-          </li>
-          <li>
-            <b>Awards: {dataObj.awardsQty} </b> 
-            {dataObj.awardsText}
-          </li>
-          <li>
-            <b>Discovered: </b>
-              {dataObj.discovered}
-          </li>
-        </ul>
-      </section>
-  );
-}
+// import { getImageUrl } from './utils.js';
+// let dataArr = [{name: 'Maria Skłodowska-Curie',
+//              imagId: 'szV5sdG',
+//               profession: 'physicist and chemist',
+//               discovered: 'polonium (element)',
+//               awardsQty: '4',
+//               awardsText: '(Nobel Prize in Physics, Nobel Prize in Chemistry, Davy Medal, Matt'
+//             },
+//                {
+//                  name: 'Katsuko Saruhashi',
+//              imagId: 'YfeOqp2',
+//               profession: 'geochemist',
+//               discovered: 'a method for measuring carbon dioxide in seawater',
+//               awardsQty: '2',
+//               awardsText: '(Miyake Prize for geochemistry, Tanaka Prize)'
+//                }
+//               ]
+// function Profile ({dataObj}) {
+//   return (
+//      <section className="profile">
+//         <h2>{dataObj.name}</h2>
+//         <img
+//           className="avatar"
+//           src={getImageUrl(dataObj.imagId)}
+//           alt={dataObj.name}
+//           width={70}
+//           height={70}
+//         />
+//         <ul>
+//           <li>
+//             <b>Profession: </b> 
+//             {dataObj.profession}
+//           </li>
+//           <li>
+//             <b>Awards: {dataObj.awardsQty} </b> 
+//             {dataObj.awardsText}
+//           </li>
+//           <li>
+//             <b>Discovered: </b>
+//               {dataObj.discovered}
+//           </li>
+//         </ul>
+//       </section>
+//   );
+// }
 
-export default function Gallery() {
+// export default function Gallery() {
+//   return (
+//     <div>
+//       <h1>Notable Scientists</h1>
+//      <Profile dataObj = {dataArr[0]}/>
+//      <Profile dataObj = {dataArr[1]}/>
+//     </div>
+//   );
+// }
+
+import { recipes } from './data.js';
+
+export default function RecipeList() {
+  const listRecipes = recipes.map(item=>{
+    let listIngredients = item.ingredients.map((ingr, i)=>{
+      return <li key={ingr[i]}>{ingr}</li>
+    })
+    
+    return (
+      <>
+      <h1 key={item.id}>{item.name}</h1>
+      <ul>{listIngredients}</ul>
+      </>
+    );
+  })
   return (
     <div>
-      <h1>Notable Scientists</h1>
-     <Profile dataObj = {dataArr[0]}/>
-     <Profile dataObj = {dataArr[1]}/>
+      {listRecipes}
     </div>
   );
 }
